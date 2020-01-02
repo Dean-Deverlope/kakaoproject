@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="../kakao%20project_v2/CSS/normalize.css%20v8.0.1.css" />
+    <link rel="stylesheet" href="../kakao%20project_v2/CSS/stylesheet.css" />
+    <title>kakao_chatroom</title>
+</head>
+<body>
+    <container id="container">
+        <!--채팅창 상단 영역 -->
+        <header class="section">
+            <div id="header-left">
+                <span>SKT</span>
+                <span>2:45</span>
+                <span><img src="images/kakao.svg" alt="카카오톡이미지" style="width: 20px" /></span>
+            </div>
+            <div id="header-right">
+                <span><img src="images/alarm-clock.png" alt="알람시계" class="hedaer-right-images" /></span>
+                <span><img src="images/wifi.png" alt="와이파이" class="hedaer-right-images" /></span>
+                <span><img src="images/battery.png" alt="충전량표시" class="hedaer-right-images" /></span>
+            </div>
+        </header>
+
+        <!--채팅창 메시지 표시 영역 -->
+        <main class="section">
+            <div id="main-top">
+                <div id="main-top-left">
+                    <span><img src="images/left-arrow.png" alt="뒤로가기" style="width: 30px" /></span>
+                    <span>Groupchat</span>
+                    <span>4</span> <!--채팅방 인원 -->
+                </div>
+                <div id="main-top-right">
+                    <span><img src="images/search.png" style="width: 30px;" alt="검색"></span>
+                    <span><img src="images/menu-button.png" style="width: 30px;" alt="메뉴버튼"></span>
+                </div>
+            </div>
+            <div id="outer-main-bottom">
+                <div id="main-bottom">
+                    <!--메시지 주고 받은 날짜 영역-->
+                    <div class="date"><span>Tuesday, December 31, 2019</span></div>
+                    <!--받은 메시지 영역-->
+                    <div class="received-message">
+                    <span class="profile">
+                        <img src="images/user.png" alt="프로필" style="width: 50px; margin-left: 10px">
+                    </span>
+                        <span class="received-message-area">
+                        <span class="profile-name">Red</span>
+                        <span class="received-message-context">study hard!</span>
+                    </span>
+                        <div class="time"><span>4:16pm</span></div>
+                    </div>
+                    <!--보낸 메시지 영역: JS로 클래스 추가-->
+                </div>
+            </div>
+        </main>
+
+        <!--텍스트 입력 영역 -->
+        <text-area id="text-area" class="section">
+            <div class="left-images"><img src="images/plusbox.svg" style="width: 20px; opacity: 0.6" /></div>
+            <div class="left-images" id="text-box-area">
+                <input type="text" id="text-box" onkeypress="sendMessage(event)" placeholder="type here">
+            </div>
+            <div class="right-images">
+                <div  class="text-right" id="bnt-area"><input type="button" value="send" id="send-btn" onclick="sendMessage(event)" style="width: 80px; height: 80px" /></div>
+                <div  class="text-right" style="margin-right: 20px;"><img src="images/emoticon.svg" style="width: 20px; opacity: 0.6"></div>
+                <div class="text-right"><img src="images/hash.svg" style="width: 20px; opacity: 0.6"></div>
+            </div>
+        </text-area>
+    </container>
+    <script>
+        function sendMessage(event) {
+            if (event.keyCode === 13) {
+                var text = document.getElementById('text-box').value;
+                var mainBottom = document.getElementById('main-bottom');
+
+                var sendedMessage = document.createElement('div');
+                sendedMessage.className ='sended-message';
+
+                var messageContext = document.createElement('span');
+                messageContext.className = 'sended-message-context';
+                var messageTime = document.createElement('div');
+                messageTime.className = 'time';
+
+                let date = new Date();
+                let hours = date.getHours();
+                let minutes = date.getMinutes();
+
+                messageContext.append(document.createTextNode(text));
+                text = hours + ':' + minutes + 'pm';
+                messageTime.append(document.createTextNode(text));
+
+                sendedMessage.append(messageContext);
+                sendedMessage.append(messageTime);
+
+                mainBottom.appendChild(sendedMessage);
+
+                document.getElementById('text-box').value = '';
+
+                mainBottom.scrollTop = mainBottom.scrollHeight;
+            }
+        }
+    </script>
+</body>
+</html>

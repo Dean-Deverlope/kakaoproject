@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="outter" style="width: 400px; overflow-y: scroll;">
+    <div id="inner" style="height: 50px; border: 1px solid black;"></div>
+</div>
+
+<script>
+    let scrollbarWidth = outter.offsetWidth - inner.offsetWidth;
+    inner.innerHTML = "Scrollbar width: " + scrollbarWidth;
+</script>
+</body>
+</html>
